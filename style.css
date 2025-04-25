@@ -25,10 +25,11 @@ main {
   margin: 2rem auto;
   max-width: 600px;
   font-size: 1.1rem;
+  color: #510b63;
 }
 
 footer {
   margin-top: 4rem;
-  font-size: 0.9rem;
-  color: #777;
+  font-size: 1.1rem;
+  color: #510b63;
 }
