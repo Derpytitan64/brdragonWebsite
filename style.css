@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  color: #ffffff;
+  color: #510b63;
   text-align: center;
   padding: 2rem;
 
@@ -25,11 +25,10 @@ main {
   margin: 2rem auto;
   max-width: 600px;
   font-size: 1.1rem;
-  color: #510b63;
 }
 
 footer {
   margin-top: 4rem;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   color: #510b63;
 }
