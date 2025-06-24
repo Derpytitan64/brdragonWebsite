@@ -100,3 +100,36 @@ realtime.connection.once("connected", () => {
   gameRoom.presence.subscribe("leave", (player) => {});
   deadPlayerCh.subscribe("dead-notif", (msg) => {});
 });
+
+gameRoom.presence.subscribe("enter", (player) => {
+  let newPlayerId;
+  let newPlayerData;
+  alivePlayers++;
+  totalPlayers++;
+
+  if (totalPlayers === 1) {
+    gameTickerOn = true;
+    startGameDataTicker();
+  }
+
+  newPlayerId = player.clientId;
+  playerChannels[newPlayerId] = realtime.channels.get(
+    "clientChannel-" + player.clientId
+  );
+
+  newPlayerObject = {
+    id: newPlayerId,
+    x: Math.floor((Math.random() * 1370 + 30) * 1000) / 1000,
+    y: 20,
+    invaderAvatarType: avatarTypes[randomAvatarSelector()],
+    invaderAvatarColor: avatarColors[randomAvatarSelector()],
+    score: 0,
+    nickname: player.data,
+    isAlive: true,
+  };
+  players[newPlayerId] = newPlayerObject;
+  if (totalPlayers === MIN_PLAYERS_TO_START_GAME) {
+    startShipAndBullets();
+  }
+  subscribeToPlayerInput(playerChannels[newPlayerId], newPlayerId);
+});
