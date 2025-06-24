@@ -1,4 +1,3 @@
-
 const envConfig = require("dotenv").config();
 const express = require("express");
 const Ably = require("ably");
@@ -38,17 +37,10 @@ let copyOfShipBody = {
   position: "",
   velocity: "",
 };
+
 const realtime = Ably.Realtime({
   key: ABLY_API_KEY,
   echoMessages: false,
-});
-
-realtime.connection.once("connected", () => {
-  gameRoom = realtime.channels.get("game-room");
-  deadPlayerCh = realtime.channels.get("dead-player");
-  gameRoom.presence.subscribe("enter", (player) => {});
-  gameRoom.presence.subscribe("leave", (player) => {});
-  deadPlayerCh.subscribe("dead-notif", (msg) => {});
 });
 
 //create a uniqueId to assign to clients on auth
