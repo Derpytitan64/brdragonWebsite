@@ -43,6 +43,14 @@ const realtime = Ably.Realtime({
   echoMessages: false,
 });
 
+realtime.connection.once("connected", () => {
+  gameRoom = realtime.channels.get("game-room");
+  deadPlayerCh = realtime.channels.get("dead-player");
+  gameRoom.presence.subscribe("enter", (player) => {});
+  gameRoom.presence.subscribe("leave", (player) => {});
+  deadPlayerCh.subscribe("dead-notif", (msg) => {});
+});
+
 //create a uniqueId to assign to clients on auth
 const uniqueId = function () {
   return "id-" + totalPlayers + Math.random().toString(36).substr(2, 16);
